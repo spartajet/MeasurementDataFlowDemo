@@ -4,9 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeasurementDataFlowDemo"
+        xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="800" Width="1000" WindowState="Maximized">
+    <Window.DataContext>
+        <Binding RelativeSource="{RelativeSource Self}"></Binding>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Margin" Value="3"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <oxy:Plot Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Name="Plot" Title="MeasureData"  LegendBackground="White" LegendBorderThickness="1" LegendBorder="Gray">
+            <oxy:Plot.Axes>
+                <oxy:LinearAxis Title="Sequence" Position="Bottom" MajorGridlineThickness="1" MinorGridlineStyle="Dot" MinorGridlineThickness="1" MajorGridlineStyle="Solid"></oxy:LinearAxis>
+                <oxy:LinearAxis Title="Value" Position="Left" MajorGridlineThickness="1" MinorGridlineStyle="Dot" MinorGridlineThickness="1" MajorGridlineStyle="Solid"></oxy:LinearAxis>
+            </oxy:Plot.Axes>
+            <oxy:Plot.Series>
+                <oxy:LineSeries Title="Force" StrokeThickness="1" ItemsSource="{Binding Datas,Mode=TwoWay}">
+                </oxy:LineSeries>
+            </oxy:Plot.Series>
+        </oxy:Plot>
+        <Button Grid.Row="1" Grid.Column="0" Content="生成通道一数据" Name="GenerateChannel1Button" Click="GenerateChannel1Button_OnClick"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Content="生成通道二数据" Name="GenerateChannel2Button" Click="GenerateChannel2Button_OnClick"></Button>
+        <Button Grid.Row="1" Grid.Column="2" Content="生成通道三数据" Name="GenerateChannel3Button" Click="GenerateChannel3Button_OnClick"></Button>
+        <Button Grid.Row="1" Grid.Column="3" Content="开始测量" Name="StartMeasureButton" Click="StartMeasureButton_OnClick"></Button>
+        <Button Grid.Row="1" Grid.Column="4" Content="结束测量" Name="StopMeasureButton" Click="StopMeasureButton_OnClick"></Button>
     </Grid>
 </Window>
