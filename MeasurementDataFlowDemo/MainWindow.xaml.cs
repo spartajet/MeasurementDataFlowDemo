@@ -235,8 +235,7 @@ namespace MeasurementDataFlowDemo
                 {
                     if (this._queue1.Count > 0)
                     {
-                        double result;
-                        this._queue1.TryDequeue(out result);
+                        this._queue1.TryDequeue(out var result);
                         this._bufferBlock1.Post(result);
                     }
                     else
